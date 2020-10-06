@@ -1,0 +1,33 @@
+size(200,200);
+loadPixels();
+
+String frase = "nel mezzo del cammin di nostra vita";  //definiamo la frase da convertire
+
+int l = frase.length();   //verifichiamo la lunghezza della frase
+
+
+if(l%3 != 0){
+  if (l%3 == 1)              //se la parola non è composta da un multiplo di tre (colori di ogni pixel)
+    frase = frase + "\0\0";    //aggiungiamo un numero di caratteri NULL (\0) tale da rendere la frase multiplo di 3
+  if (l%3 == 2){
+    frase = frase + "\0";
+  }
+}
+
+l = frase.length();
+int[] ascii = new int[l];
+
+for (int i = 0; i < l; i++){
+  ascii[i] = byte(frase.charAt(i));
+}
+
+int n_pixel = 0;
+
+for (int i = 0; i < l/3; i++){
+  color colore = color(ascii[i*3],ascii[i*3+1],ascii[i*3+2]) ;
+  hex(colore);
+  pixels[n_pixel] = colore ;
+  n_pixel++;
+}
+updatePixels();
+                
